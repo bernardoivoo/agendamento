@@ -1,7 +1,7 @@
-package Controller;
+package clinica.Controller;
 
-import Model.entidades.Consulta;
-import Service.ConsultaService;
+import clinica.Model.entidades.Consulta;
+import clinica.Service.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

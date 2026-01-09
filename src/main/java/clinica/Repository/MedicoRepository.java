@@ -2,14 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model.enums;
+package clinica.Repository;
 
+import clinica.Model.entidades.Medico;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public enum StatusConsulta {
-    AGENDADA,
-    CONFIRMADA,
-    CANCELADA,
-    REALIZADA,
-    NAO_COMPARECEU
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
 }
-

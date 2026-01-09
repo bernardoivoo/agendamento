@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Repository;
+package clinica.Repository;
 
 
-import Model.entidades.Consulta;
-import Model.entidades.Medico;
+import clinica.Model.entidades.Consulta;
+import clinica.Model.entidades.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

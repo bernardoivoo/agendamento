@@ -1,7 +1,7 @@
-package Service;
+package clinica.Service;
 
-import Model.entidades.Medico;
-import Repository.MedicoRepository;
+import clinica.Model.entidades.Medico;
+import clinica.Repository.MedicoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

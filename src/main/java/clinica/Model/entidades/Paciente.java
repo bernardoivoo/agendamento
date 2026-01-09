@@ -1,4 +1,4 @@
-package Model.entidades;
+package clinica.Model.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;

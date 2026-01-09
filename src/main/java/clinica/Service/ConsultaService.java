@@ -1,12 +1,12 @@
-package Service;
+package clinica.Service;
 
-import Model.entidades.Consulta;
-import Model.entidades.Medico;
-import Model.entidades.Paciente;
-import Model.enums.StatusConsulta;
-import Repository.ConsultaRepository;
-import Repository.MedicoRepository;
-import Repository.PacienteRepository;
+import clinica.Model.entidades.Consulta;
+import clinica.Model.entidades.Medico;
+import clinica.Model.entidades.Paciente;
+import clinica.Model.enums.StatusConsulta;
+import clinica.Repository.ConsultaRepository;
+import clinica.Repository.MedicoRepository;
+import clinica.Repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

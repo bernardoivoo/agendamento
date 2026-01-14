@@ -2,7 +2,6 @@ package clinica.Controller;
 
 import clinica.Model.entidades.Consulta;
 import clinica.Service.ConsultaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/consultas")
 public class ConsultaController {
 
-    @Autowired
-    private ConsultaService consultaService;
+    private final ConsultaService consultaService;
+
+    public ConsultaController(ConsultaService consultaService) {
+        this.consultaService = consultaService;
+    }
 
     @GetMapping
     public List<Consulta> listarTodas() {
@@ -30,11 +32,10 @@ public class ConsultaController {
     public Consulta agendarConsulta(
             @RequestParam Long pacienteId,
             @RequestParam Long medicoId,
-            @RequestParam String dataHora,
+            @RequestParam LocalDateTime dataHora,
             @RequestParam(required = false) String observacoes
     ) {
-        LocalDateTime dataHoraConvertida = LocalDateTime.parse(dataHora);
-        return consultaService.agendarConsulta(pacienteId, medicoId, dataHoraConvertida, observacoes);
+        return consultaService.agendarConsulta(pacienteId, medicoId, dataHora, observacoes);
     }
 
     // -------- CONFIRMAR ----------

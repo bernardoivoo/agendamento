@@ -1,4 +1,4 @@
-package clinica.dto;
+package Dto;
 
 import java.time.LocalDateTime;
 

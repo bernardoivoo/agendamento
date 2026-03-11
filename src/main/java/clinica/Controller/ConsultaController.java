@@ -2,7 +2,7 @@ package clinica.Controller;
 
 import clinica.Model.entidades.Consulta;
 import clinica.Service.ConsultaService;
-import clinica.dto.AgendarConsultaDTO;
+import Dto.AgendarConsultaDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +28,12 @@ public class ConsultaController {
     }
 
     @PostMapping
-    public Consulta agendarConsulta(@RequestBody AgendarConsultaDTO dto) {
+    public Consulta agendarConsulta(@RequestBody AgendarConsultaDTO Dto) {
         return consultaService.agendarConsulta(
-                dto.getPacienteId(),
-                dto.getMedicoId(),
-                dto.getDataHora(),
-                dto.getObservacoes()
+                Dto.getPacienteId(),
+                Dto.getMedicoId(),
+                Dto.getDataHora(),
+                Dto.getObservacoes()
         );
     }
 

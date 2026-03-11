@@ -1,34 +1,51 @@
 package clinica.Model.entidades;
 
 import jakarta.persistence.*;
-import lombok.*;
-import java.util.List;
 
 @Entity
-@Table(name = "medicos")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long crm;
+    private Long id;
 
-    @Column(nullable = false, length = 120)
     private String nome;
-
-    @Column(nullable = false, unique = true, length = 120)
-    private String email;
-
-    @Column(nullable = false, length = 15)
-    private String telefone;
+    private String crm;
 
     @ManyToOne
-    @JoinColumn(name = "especialidade_id", nullable = false)
     private Especialidade especialidade;
 
-    @OneToMany(mappedBy = "medico")
-    private List<Consulta> consultas;
+    public Medico() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
+    public Especialidade getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
+    }
 }

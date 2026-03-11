@@ -7,7 +7,6 @@ import clinica.Model.enums.StatusConsulta;
 import clinica.Repository.ConsultaRepository;
 import clinica.Repository.MedicoRepository;
 import clinica.Repository.PacienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,14 +15,18 @@ import java.util.List;
 @Service
 public class ConsultaService {
 
-    @Autowired
-    private ConsultaRepository consultaRepository;
+    private final ConsultaRepository consultaRepository;
+    private final PacienteRepository pacienteRepository;
+    private final MedicoRepository medicoRepository;
 
-    @Autowired
-    private PacienteRepository pacienteRepository;
+    public ConsultaService(ConsultaRepository consultaRepository,
+                           PacienteRepository pacienteRepository,
+                           MedicoRepository medicoRepository) {
 
-    @Autowired
-    private MedicoRepository medicoRepository;
+        this.consultaRepository = consultaRepository;
+        this.pacienteRepository = pacienteRepository;
+        this.medicoRepository = medicoRepository;
+    }
 
     public List<Consulta> listarTodas() {
         return consultaRepository.findAll();
@@ -34,10 +37,11 @@ public class ConsultaService {
                 .orElseThrow(() -> new RuntimeException("Consulta não encontrada"));
     }
 
-    public Consulta agendarConsulta(Long pacienteId, Long medicoId, LocalDateTime dataHora, String observacoes) {
+    public Consulta agendarConsulta(Long pacienteId, Long medicoId,
+                                    LocalDateTime dataHora, String observacoes) {
 
         if (dataHora.isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Não é possível agendar uma consulta no passado");
+            throw new RuntimeException("Não é possível agendar consulta no passado");
         }
 
         Paciente paciente = pacienteRepository.findById(pacienteId)
@@ -49,7 +53,7 @@ public class ConsultaService {
         boolean ocupado = consultaRepository.existsByMedicoAndDataHora(medico, dataHora);
 
         if (ocupado) {
-            throw new RuntimeException("Esse horário já está ocupado para este médico");
+            throw new RuntimeException("Horário já ocupado para este médico");
         }
 
         Consulta consulta = new Consulta();
@@ -64,33 +68,25 @@ public class ConsultaService {
 
     public Consulta confirmarConsulta(Long id) {
         Consulta consulta = buscarPorId(id);
-
         consulta.setStatus(StatusConsulta.CONFIRMADA);
-
         return consultaRepository.save(consulta);
     }
 
     public Consulta cancelarConsulta(Long id) {
         Consulta consulta = buscarPorId(id);
-
         consulta.setStatus(StatusConsulta.CANCELADA);
-
         return consultaRepository.save(consulta);
     }
 
     public Consulta marcarComoRealizada(Long id) {
         Consulta consulta = buscarPorId(id);
-
         consulta.setStatus(StatusConsulta.REALIZADA);
-
         return consultaRepository.save(consulta);
     }
 
     public Consulta marcarComoNaoCompareceu(Long id) {
         Consulta consulta = buscarPorId(id);
-
         consulta.setStatus(StatusConsulta.NAO_COMPARECEU);
-
         return consultaRepository.save(consulta);
     }
 

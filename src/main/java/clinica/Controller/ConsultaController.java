@@ -2,9 +2,9 @@ package clinica.Controller;
 
 import clinica.Model.entidades.Consulta;
 import clinica.Service.ConsultaService;
+import clinica.dto.AgendarConsultaDTO;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -27,42 +27,36 @@ public class ConsultaController {
         return consultaService.buscarPorId(id);
     }
 
-    // -------- AGENDAR CONSULTA ----------
-    @PostMapping("/agendar")
-    public Consulta agendarConsulta(
-            @RequestParam Long pacienteId,
-            @RequestParam Long medicoId,
-            @RequestParam LocalDateTime dataHora,
-            @RequestParam(required = false) String observacoes
-    ) {
-        return consultaService.agendarConsulta(pacienteId, medicoId, dataHora, observacoes);
+    @PostMapping
+    public Consulta agendarConsulta(@RequestBody AgendarConsultaDTO dto) {
+        return consultaService.agendarConsulta(
+                dto.getPacienteId(),
+                dto.getMedicoId(),
+                dto.getDataHora(),
+                dto.getObservacoes()
+        );
     }
 
-    // -------- CONFIRMAR ----------
     @PutMapping("/{id}/confirmar")
     public Consulta confirmarConsulta(@PathVariable Long id) {
         return consultaService.confirmarConsulta(id);
     }
 
-    // -------- CANCELAR ----------
     @PutMapping("/{id}/cancelar")
     public Consulta cancelarConsulta(@PathVariable Long id) {
         return consultaService.cancelarConsulta(id);
     }
 
-    // -------- REALIZADA ----------
     @PutMapping("/{id}/realizada")
     public Consulta marcarRealizada(@PathVariable Long id) {
         return consultaService.marcarComoRealizada(id);
     }
 
-    // -------- NÃO COMPARECEU ----------
     @PutMapping("/{id}/nao-compareceu")
     public Consulta marcarNaoCompareceu(@PathVariable Long id) {
         return consultaService.marcarComoNaoCompareceu(id);
     }
 
-    // -------- DELETAR ----------
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         consultaService.deletar(id);

@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package clinica.Model.entidades;
 
-
-import clinica.Model.entidades.Especialidade;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "medicos")
@@ -33,5 +28,7 @@ public class Medico {
     @ManyToOne
     @JoinColumn(name = "especialidade_id", nullable = false)
     private Especialidade especialidade;
-}
 
+    @OneToMany(mappedBy = "medico")
+    private List<Consulta> consultas;
+}

@@ -2,6 +2,7 @@ package clinica.Model.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "pacientes")
@@ -26,5 +27,7 @@ public class Paciente {
 
     @Column(length = 11, unique = true)
     private String cpf;
-}
 
+    @OneToMany(mappedBy = "paciente")
+    private List<Consulta> consultas;
+}
